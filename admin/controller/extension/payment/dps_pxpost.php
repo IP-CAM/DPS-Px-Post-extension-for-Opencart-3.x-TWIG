@@ -1,11 +1,11 @@
 <?php
 
-class ControllerPaymentDPSPxPost extends Controller {
+class ControllerExtensionPaymentDPSPxPost extends Controller {
 
 	private $error = array();
 
 	public function index() {
-		$this->load->language('payment/dps_pxpost');
+		$this->load->language('extension/payment/dps_pxpost');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
@@ -17,7 +17,7 @@ class ControllerPaymentDPSPxPost extends Controller {
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
-			$this->response->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL'));
+			$this->response->redirect($this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'], 'SSL'));
 		}
 
 		$text_array = array('heading_title', 'text_enabled','text_disabled','text_auth','text_purchase','text_all_zones',
@@ -58,25 +58,25 @@ class ControllerPaymentDPSPxPost extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text'		=> $this->language->get('text_home'),
-			'href'		=> $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'		=> $this->url->link('common/home', 'user_token=' . $this->session->data['user_token'], 'SSL'),
 			'separator' => FALSE
 		);
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_payment'),
-			'href'      => $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'], 'SSL'),
 			'separator' => ' :: '
 		);
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
-			'href'      => $this->url->link('payment/dps_pxpost', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('extension/payment/dps_pxpost', 'user_token=' . $this->session->data['user_token'], 'SSL'),
 			'separator' => ' :: '
 		);
 
-		$data['action'] = $this->url->link('payment/dps_pxpost', 'token=' . $this->session->data['token'], 'SSL');
+		$data['action'] = $this->url->link('extension/payment/dps_pxpost', 'user_token=' . $this->session->data['user_token'], 'SSL');
 
-		$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');
+		$data['cancel'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'], 'SSL');
 
 		if (isset($this->request->post['dps_pxpost_username'])) {
 			$data['dps_pxpost_username'] = $this->request->post['dps_pxpost_username'];
@@ -161,11 +161,11 @@ class ControllerPaymentDPSPxPost extends Controller {
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
-		$this->response->setOutput($this->load->view('payment/dps_pxpost.tpl', $data));
+		$this->response->setOutput($this->load->view('extension/payment/dps_pxpost', $data));
 	}
 
 	private function validate() {
-		if ( ! $this->user->hasPermission('modify', 'payment/dps_pxpost')) {
+		if ( ! $this->user->hasPermission('modify', 'extension/payment/dps_pxpost')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 

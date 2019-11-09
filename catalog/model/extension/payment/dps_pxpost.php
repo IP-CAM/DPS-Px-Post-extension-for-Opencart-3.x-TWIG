@@ -1,7 +1,7 @@
 <?php 
-class ModelPaymentDPSPxPost extends Model {
+class ModelExtensionPaymentDPSPxPost extends Model {
   	public function getMethod($address, $total) {
-		$this->load->language('payment/dps_pxpost');
+		$this->load->language('extension/payment/dps_pxpost');
 		
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('dps_pxpost_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
 		

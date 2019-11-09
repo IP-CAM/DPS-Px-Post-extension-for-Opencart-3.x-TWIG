@@ -1,8 +1,8 @@
 <?php
-class ControllerPaymentDPSPxPost extends Controller {
+class ControllerExtensionPaymentDPSPxPost extends Controller {
 
 	public function index() {
-		$this->language->load('payment/dps_pxpost');
+		$this->language->load('extension/payment/dps_pxpost');
 		
 		$data['text_credit_card'] = $this->language->get('text_credit_card');
 		$data['text_wait'] = $this->language->get('text_wait');
@@ -35,16 +35,16 @@ class ControllerPaymentDPSPxPost extends Controller {
 			);
 		}
 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/dps_pxpost.tpl')) {
-			return $this->load->view($this->config->get('config_template') . '/template/payment/dps_pxpost.tpl', $data);
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/extension/payment/dps_pxpost')) {
+			return $this->load->view($this->config->get('config_template') . '/template/extension/payment/dps_pxpost', $data);
 		} else {
-			return $this->load->view('default/template/payment/dps_pxpost.tpl', $data);
+			return $this->load->view('default/extension/template/payment/dps_pxpost', $data);
 		}
 	}
 	
 	public function send() {
 
-		$this->load->language('payment/dps_pxpost');
+		$this->load->language('extension/payment/dps_pxpost');
 		$this->load->model('checkout/order');
 		$url = $this->config->get('dps_pxpost_url');	
 

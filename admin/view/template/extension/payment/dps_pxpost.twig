@@ -1,0 +1,183 @@
+{{ header }}{{ column_left }}
+
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="pull-right">
+                <button type="submit" form="form-paymentexpress" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+                <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+            <h1>{{ heading_title }}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        {% if error_warning %}
+        <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+        {% endif %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+            </div>
+            <div class="panel-body">
+                <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-dpspxpost" class="form-horizontal">
+
+                    <div class="form-group required">
+                        <label class="col-sm-2 control-label" for="dps_pxpost_username">
+                            {{ entry_username }}</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="dps_pxpost_username" value="{{ dps_pxpost_username }}" placeholder="{{ dps_pxpost_username }}" id="dps_pxpost_username" class="form-control" />
+
+                            {% if error_username %}
+                            <div class="text-danger">{{ error_username }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="form-group required">
+                        <label class="col-sm-2 control-label" for="dps_pxpost_pass"><span data-toggle="tooltip" title="{{ help_pass }}">{{ entry_pass }}</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="dps_pxpost_pass" value="{{ dps_pxpost_pass }}" placeholder="{{ dps_pxpost_pass }}" id="dps_pxpost_pass" class="form-control" />
+
+                            {% if error_pass %}
+                            <div class="text-danger">{{ error_pass }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="form-group required">
+                        <label class="col-sm-2 control-label" for="dps_pxpost_url"><span data-toggle="tooltip" title="{{ help_url }}">{{ entry_url }}</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="dps_pxpost_url" value="{{ dps_pxpost_url }}" placeholder="{{ dps_pxpost_url }}" id="dps_pxpost_url" class="form-control" />
+
+                            {% if error_url %}
+                            <div class="text-danger">{{ error_url }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="dps_pxpost_txn_type"><span data-toggle="tooltip" title="{{ help_txn_type }}">{{ entry_txn_type }}</label>
+                        <div class="col-sm-10">
+                            <select name="dps_pxpost_txn_type" id="dps_pxpost_txn_type" class="form-control">
+                                {% if dps_pxpost_txn_type  ==  "Auth" %}
+                                <option value="Auth" selected="selected">{{ text_auth }}</option>
+                                <option value="Purchase">{{ text_purchase }}</option>
+                                {% else %}
+                                <option value="Auth">{{ text_auth }}</option>
+                                <option value="Purchase" selected="selected">{{ text_purchase }}</option>
+                                {% endif %} 
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="dps_pxpost_billing_vault"><span data-toggle="tooltip" title="{{ help_billing_vault }}">{{ entry_billing_vault }}</label>
+                        <div class="col-sm-10">
+                            <select name="dps_pxpost_billing_vault" id="dps_pxpost_billing_vault" class="form-control">
+                                {% if dps_pxpost_billing_vault %}
+                                <option value="1" selected="selected">{{ text_enabled }}</option>
+                                <option value="0">{{ text_disabled }}</option>
+                                {% else %}
+                                <option value="1">{{ text_enabled }}</option>
+                                <option value="0" selected="selected">{{ text_disabled }}</option>
+                                {% endif %} 
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="dps_pxpost_processed_status_id">{{ entry_processed_status }}</label>
+                        <div class="col-sm-10">
+                            <select name="dps_pxpost_processed_status_id" id="dps_pxpost_processed_status_id" class="form-control">
+                                {% for order_status in order_statuses %}
+                                {% if order_status.order_status_id  ==  dps_pxpost_processed_status_id %}
+                                <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
+                                {% else %} 
+                                <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
+                                {% endif %} 
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="dps_pxpost_failed_status_id">{{ entry_failed_status }}</label>
+                        <div class="col-sm-10">
+                            <select name="dps_pxpost_failed_status_id" id="dps_pxpost_failed_status_id" class="form-control">
+                                {% for order_status in order_statuses %}
+                                {% if order_status.order_status_id  ==  dps_pxpost_failed_status_id %}
+                                <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
+                                {% else %}
+                                <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
+                                {% endif %} 
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="dps_pxpost_geo_zone_id">{{ entry_geo_zone }}</label>
+                        <div class="col-sm-10">
+                            <select name="dps_pxpost_geo_zone_id" id="dps_pxpost_geo_zone_id" class="form-control">
+                                <option value="0">{{ text_all_zones }}</option>
+                                {% for geo_zone in geo_zones %}
+                                {% if geo_zone.geo_zone_id  ==  dps_pxpost_geo_zone_id %}
+                                <option value="{{ geo_zone.geo_zone_id }}" selected="selected">{{ geo_zone.name }}</option>
+                                {% else %}
+                                <option value="{{ geo_zone.geo_zone_id }}">{{ geo_zone.name }}</option>
+                                {% endif %} 
+                                {% endfor %} 
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="dps_pxpost_status">{{ entry_status }}</label>
+                        <div class="col-sm-10">
+                            <select name="dps_pxpost_status" id="dps_pxpost_status" class="form-control">
+                                {% if dps_pxpost_status %}
+                                <option value="1" selected="selected">{{ text_enabled }}</option>
+                                <option value="0">{{ text_disabled }}</option>
+                                {% else %}
+                                <option value="1">{{ text_enabled }}</option>
+                                <option value="0" selected="selected">{{ text_disabled }}</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="dps_pxpost_avs">{{ entry_avs }}</label>
+                        <div class="col-sm-10">
+                            <select name="dps_pxpost_avs" id="dps_pxpost_avs" class="form-control">
+                                {% if dps_pxpost_avs %}
+                                <option value="1" selected="selected">{{ text_enabled }}</option>
+                                <option value="0">{{ text_disabled }}</option>
+                                {% else %}
+                                <option value="1">{{ text_enabled }}</option>
+                                <option value="0" selected="selected">{{ text_disabled }}</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="dps_pxpost_sort_order">{{ entry_sort_order }}</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="dps_pxpost_sort_order" value="{{ dps_pxpost_sort_order }}" placeholder="{{ dps_pxpost_sort_order }}" id="input-sort-order" class="form-control" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{ footer }}
