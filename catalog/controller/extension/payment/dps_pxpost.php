@@ -3,6 +3,7 @@ class ControllerExtensionPaymentDPSPxPost extends Controller {
 
 	public function index() {
 		$this->language->load('extension/payment/dps_pxpost');
+		$this->load->model('extension/payment/dps_pxpost');
 		
 		$data['text_credit_card'] = $this->language->get('text_credit_card');
 		$data['text_wait'] = $this->language->get('text_wait');
@@ -38,7 +39,7 @@ class ControllerExtensionPaymentDPSPxPost extends Controller {
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/extension/payment/dps_pxpost')) {
 			return $this->load->view($this->config->get('config_template') . '/template/extension/payment/dps_pxpost', $data);
 		} else {
-			return $this->load->view('default/extension/template/payment/dps_pxpost', $data);
+			return $this->load->view('default/template/extension/payment/dps_pxpost', $data);
 		}
 	}
 	
@@ -46,13 +47,13 @@ class ControllerExtensionPaymentDPSPxPost extends Controller {
 
 		$this->load->language('extension/payment/dps_pxpost');
 		$this->load->model('checkout/order');
-		$url = $this->config->get('dps_pxpost_url');	
+		$url = $this->config->get('payment_dps_pxpost_url');	
 
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 		$data = "";
 		$data .= "<Txn>";
-		$data .= "<PostUsername>".$this->config->get('dps_pxpost_username')."</PostUsername>"; #Insert your DPS Username here
-		$data .= "<PostPassword>".$this->config->get('dps_pxpost_pass')."</PostPassword>"; #Insert your DPS Password here
+		$data .= "<PostUsername>".$this->config->get('payment_dps_pxpost_username')."</PostUsername>"; #Insert your DPS Username here
+		$data .= "<PostPassword>".$this->config->get('payment_dps_pxpost_pass')."</PostPassword>"; #Insert your DPS Password here
 
 		$data .= "<Amount>".$this->currency->format($order_info['total'], $order_info['currency_code'], $order_info['currency_value'], FALSE)."</Amount>";
 		$data .= "<InputCurrency>".$order_info['currency_code']."</InputCurrency>";
@@ -76,14 +77,14 @@ class ControllerExtensionPaymentDPSPxPost extends Controller {
 		
 		
 		
-		$data .= "<TxnType>".$this->config->get('dps_pxpost_txn_type')."</TxnType>";
+		$data .= "<TxnType>".$this->config->get('payment_dps_pxpost_txn_type')."</TxnType>";
 		$data .= "<MerchantReference>".$order_info['order_id']."</MerchantReference>";
-		$enable_add_bill_card = $this->config->get('dps_pxpost_billing_vault');
+		$enable_add_bill_card = $this->config->get('payment_dps_pxpost_billing_vault');
 		if ($enable_add_bill_card) {
 			$data .= "<EnableAddBillCard>1</EnableAddBillCard>";
 		}
 		
-		$avs_check = $this->config->get('dps_pxpost_avs');
+		$avs_check = $this->config->get('payment_dps_pxpost_avs');
 		if ($avs_check){
 			$data .= "<EnableAvsData>1</EnableAvsData>";
 			$data .= "<AvsAction>1</AvsAction>";
@@ -122,7 +123,7 @@ class ControllerExtensionPaymentDPSPxPost extends Controller {
 			if ($success == '1')
 			{
 				$this->load->model('checkout/order');
-				$this->model_checkout_order->confirm($order_id, $this->config->get('dps_pxpost_processed_status_id'), $comment);
+				$this->model_checkout_order->confirm($order_id, $this->config->get('payment_dps_pxpost_processed_status_id'), $comment);
 				$json['success'] = $this->url->link('checkout/success', '', 'SSL');
 				
 			} else {

@@ -29,10 +29,10 @@
                 <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-dpspxpost" class="form-horizontal">
 
                     <div class="form-group required">
-                        <label class="col-sm-2 control-label" for="dps_pxpost_username">
+                        <label class="col-sm-2 control-label" for="payment_dps_pxpost_username">
                             {{ entry_username }}</label>
                         <div class="col-sm-10">
-                            <input type="text" name="dps_pxpost_username" value="{{ dps_pxpost_username }}" placeholder="{{ dps_pxpost_username }}" id="dps_pxpost_username" class="form-control" />
+                            <input type="text" name="payment_dps_pxpost_username" value="{{ payment_dps_pxpost_username }}" placeholder="{{ payment_dps_pxpost_username }}" id="payment_dps_pxpost_username" class="form-control" />
 
                             {% if error_username %}
                             <div class="text-danger">{{ error_username }}</div>
@@ -41,9 +41,9 @@
                     </div>
 
                     <div class="form-group required">
-                        <label class="col-sm-2 control-label" for="dps_pxpost_pass"><span data-toggle="tooltip" title="{{ help_pass }}">{{ entry_pass }}</label>
+                        <label class="col-sm-2 control-label" for="payment_dps_pxpost_pass"><span data-toggle="tooltip" title="{{ help_pass }}">{{ entry_pass }}</label>
                         <div class="col-sm-10">
-                            <input type="text" name="dps_pxpost_pass" value="{{ dps_pxpost_pass }}" placeholder="{{ dps_pxpost_pass }}" id="dps_pxpost_pass" class="form-control" />
+                            <input type="text" name="payment_dps_pxpost_pass" value="{{ payment_dps_pxpost_pass }}" placeholder="{{ payment_dps_pxpost_pass }}" id="payment_dps_pxpost_pass" class="form-control" />
 
                             {% if error_pass %}
                             <div class="text-danger">{{ error_pass }}</div>
@@ -52,9 +52,9 @@
                     </div>
 
                     <div class="form-group required">
-                        <label class="col-sm-2 control-label" for="dps_pxpost_url"><span data-toggle="tooltip" title="{{ help_url }}">{{ entry_url }}</label>
+                        <label class="col-sm-2 control-label" for="payment_dps_pxpost_url"><span data-toggle="tooltip" title="{{ help_url }}">{{ entry_url }}</label>
                         <div class="col-sm-10">
-                            <input type="text" name="dps_pxpost_url" value="{{ dps_pxpost_url }}" placeholder="{{ dps_pxpost_url }}" id="dps_pxpost_url" class="form-control" />
+                            <input type="text" name="payment_dps_pxpost_url" value="{{ payment_dps_pxpost_url }}" placeholder="{{ payment_dps_pxpost_url }}" id="payment_dps_pxpost_url" class="form-control" />
 
                             {% if error_url %}
                             <div class="text-danger">{{ error_url }}</div>
@@ -63,10 +63,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="dps_pxpost_txn_type"><span data-toggle="tooltip" title="{{ help_txn_type }}">{{ entry_txn_type }}</label>
+                        <label class="col-sm-2 control-label" for="payment_dps_pxpost_txn_type"><span data-toggle="tooltip" title="{{ help_txn_type }}">{{ entry_txn_type }}</label>
                         <div class="col-sm-10">
-                            <select name="dps_pxpost_txn_type" id="dps_pxpost_txn_type" class="form-control">
-                                {% if dps_pxpost_txn_type  ==  "Auth" %}
+                            <select name="payment_dps_pxpost_txn_type" id="payment_dps_pxpost_txn_type" class="form-control">
+                                {% if payment_dps_pxpost_txn_type  ==  "Auth" %}
                                 <option value="Auth" selected="selected">{{ text_auth }}</option>
                                 <option value="Purchase">{{ text_purchase }}</option>
                                 {% else %}
@@ -79,10 +79,10 @@
 
 
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="dps_pxpost_billing_vault"><span data-toggle="tooltip" title="{{ help_billing_vault }}">{{ entry_billing_vault }}</label>
+                        <label class="col-sm-2 control-label" for="payment_dps_pxpost_billing_vault"><span data-toggle="tooltip" title="{{ help_billing_vault }}">{{ entry_billing_vault }}</label>
                         <div class="col-sm-10">
-                            <select name="dps_pxpost_billing_vault" id="dps_pxpost_billing_vault" class="form-control">
-                                {% if dps_pxpost_billing_vault %}
+                            <select name="payment_dps_pxpost_billing_vault" id="payment_dps_pxpost_billing_vault" class="form-control">
+                                {% if payment_dps_pxpost_billing_vault %}
                                 <option value="1" selected="selected">{{ text_enabled }}</option>
                                 <option value="0">{{ text_disabled }}</option>
                                 {% else %}
@@ -94,11 +94,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="dps_pxpost_processed_status_id">{{ entry_processed_status }}</label>
+                        <label class="col-sm-2 control-label" for="payment_dps_pxpost_processed_status_id">{{ entry_processed_status }}</label>
                         <div class="col-sm-10">
-                            <select name="dps_pxpost_processed_status_id" id="dps_pxpost_processed_status_id" class="form-control">
+                            <select name="payment_dps_pxpost_processed_status_id" id="payment_dps_pxpost_processed_status_id" class="form-control">
                                 {% for order_status in order_statuses %}
-                                {% if order_status.order_status_id  ==  dps_pxpost_processed_status_id %}
+                                {% if order_status.order_status_id  ==  payment_dps_pxpost_processed_status_id %}
                                 <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
                                 {% else %} 
                                 <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
@@ -109,11 +109,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="dps_pxpost_failed_status_id">{{ entry_failed_status }}</label>
+                        <label class="col-sm-2 control-label" for="payment_dps_pxpost_failed_status_id">{{ entry_failed_status }}</label>
                         <div class="col-sm-10">
-                            <select name="dps_pxpost_failed_status_id" id="dps_pxpost_failed_status_id" class="form-control">
+                            <select name="payment_dps_pxpost_failed_status_id" id="payment_dps_pxpost_failed_status_id" class="form-control">
                                 {% for order_status in order_statuses %}
-                                {% if order_status.order_status_id  ==  dps_pxpost_failed_status_id %}
+                                {% if order_status.order_status_id  ==  payment_dps_pxpost_failed_status_id %}
                                 <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
                                 {% else %}
                                 <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
@@ -124,12 +124,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="dps_pxpost_geo_zone_id">{{ entry_geo_zone }}</label>
+                        <label class="col-sm-2 control-label" for="payment_dps_pxpost_geo_zone_id">{{ entry_geo_zone }}</label>
                         <div class="col-sm-10">
-                            <select name="dps_pxpost_geo_zone_id" id="dps_pxpost_geo_zone_id" class="form-control">
+                            <select name="payment_dps_pxpost_geo_zone_id" id="payment_dps_pxpost_geo_zone_id" class="form-control">
                                 <option value="0">{{ text_all_zones }}</option>
                                 {% for geo_zone in geo_zones %}
-                                {% if geo_zone.geo_zone_id  ==  dps_pxpost_geo_zone_id %}
+                                {% if geo_zone.geo_zone_id  ==  payment_dps_pxpost_geo_zone_id %}
                                 <option value="{{ geo_zone.geo_zone_id }}" selected="selected">{{ geo_zone.name }}</option>
                                 {% else %}
                                 <option value="{{ geo_zone.geo_zone_id }}">{{ geo_zone.name }}</option>
@@ -140,10 +140,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="dps_pxpost_status">{{ entry_status }}</label>
+                        <label class="col-sm-2 control-label" for="payment_dps_pxpost_status">{{ entry_status }}</label>
                         <div class="col-sm-10">
-                            <select name="dps_pxpost_status" id="dps_pxpost_status" class="form-control">
-                                {% if dps_pxpost_status %}
+                            <select name="payment_dps_pxpost_status" id="payment_dps_pxpost_status" class="form-control">
+                                {% if payment_dps_pxpost_status %}
                                 <option value="1" selected="selected">{{ text_enabled }}</option>
                                 <option value="0">{{ text_disabled }}</option>
                                 {% else %}
@@ -155,10 +155,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="dps_pxpost_avs">{{ entry_avs }}</label>
+                        <label class="col-sm-2 control-label" for="payment_dps_pxpost_avs">{{ entry_avs }}</label>
                         <div class="col-sm-10">
-                            <select name="dps_pxpost_avs" id="dps_pxpost_avs" class="form-control">
-                                {% if dps_pxpost_avs %}
+                            <select name="payment_dps_pxpost_avs" id="payment_dps_pxpost_avs" class="form-control">
+                                {% if payment_dps_pxpost_avs %}
                                 <option value="1" selected="selected">{{ text_enabled }}</option>
                                 <option value="0">{{ text_disabled }}</option>
                                 {% else %}
@@ -170,9 +170,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="dps_pxpost_sort_order">{{ entry_sort_order }}</label>
+                        <label class="col-sm-2 control-label" for="payment_dps_pxpost_sort_order">{{ entry_sort_order }}</label>
                         <div class="col-sm-10">
-                            <input type="text" name="dps_pxpost_sort_order" value="{{ dps_pxpost_sort_order }}" placeholder="{{ dps_pxpost_sort_order }}" id="input-sort-order" class="form-control" />
+                            <input type="text" name="payment_dps_pxpost_sort_order" value="{{ payment_dps_pxpost_sort_order }}" placeholder="{{ payment_dps_pxpost_sort_order }}" id="input-sort-order" class="form-control" />
                         </div>
                     </div>
                 </form>

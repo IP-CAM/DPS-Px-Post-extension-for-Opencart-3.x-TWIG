@@ -13,7 +13,7 @@ class ControllerExtensionPaymentDPSPxPost extends Controller {
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && ($this->validate())) {
 			
-			$this->model_setting_setting->editSetting('dps_pxpost', $this->request->post);
+			$this->model_setting_setting->editSetting('payment_dps_pxpost', $this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -78,83 +78,83 @@ class ControllerExtensionPaymentDPSPxPost extends Controller {
 
 		$data['cancel'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'], 'SSL');
 
-		if (isset($this->request->post['dps_pxpost_username'])) {
-			$data['dps_pxpost_username'] = $this->request->post['dps_pxpost_username'];
+		if (isset($this->request->post['payment_dps_pxpost_username'])) {
+			$data['payment_dps_pxpost_username'] = $this->request->post['payment_dps_pxpost_username'];
 		} else {
-			$data['dps_pxpost_username'] = $this->config->get('dps_pxpost_username');
+			$data['payment_dps_pxpost_username'] = $this->config->get('payment_dps_pxpost_username');
 		}
 
-		if (isset($this->request->post['dps_pxpost_pass'])) {
-			$data['dps_pxpost_pass'] = $this->request->post['dps_pxpost_pass'];
+		if (isset($this->request->post['payment_dps_pxpost_pass'])) {
+			$data['payment_dps_pxpost_pass'] = $this->request->post['payment_dps_pxpost_pass'];
 		} else {
-			$data['dps_pxpost_pass'] = $this->config->get('dps_pxpost_pass');
+			$data['payment_dps_pxpost_pass'] = $this->config->get('payment_dps_pxpost_pass');
 		}
 
-		if (isset($this->request->post['dps_pxpost_url'])) {
-			$data['dps_pxpost_url'] = $this->request->post['dps_pxpost_url'];
+		if (isset($this->request->post['payment_dps_pxpost_url'])) {
+			$data['payment_dps_pxpost_url'] = $this->request->post['payment_dps_pxpost_url'];
 		} else {
-			$data['dps_pxpost_url'] = $this->config->get('dps_pxpost_url');
+			$data['payment_dps_pxpost_url'] = $this->config->get('payment_dps_pxpost_url');
 		}
-		if ($data['dps_pxpost_url'] == '') {
-			$data['dps_pxpost_url'] = 'https://sec.paymentexpress.com/pxpost.aspx';
+		if ($data['payment_dps_pxpost_url'] == '') {
+			$data['payment_dps_pxpost_url'] = 'https://sec.paymentexpress.com/pxpost.aspx';
 		}		
 
-		if (isset($this->request->post['dps_pxpost_txn_type'])) {
-			$data['dps_pxpost_txn_type'] = $this->request->post['dps_pxpost_txn_type'];
+		if (isset($this->request->post['payment_dps_pxpost_txn_type'])) {
+			$data['payment_dps_pxpost_txn_type'] = $this->request->post['payment_dps_pxpost_txn_type'];
 		} else {
-			$data['dps_pxpost_txn_type'] = $this->config->get('dps_pxpost_txn_type');
+			$data['payment_dps_pxpost_txn_type'] = $this->config->get('payment_dps_pxpost_txn_type');
 		}
 
-		if (isset($this->request->post['dps_pxpost_billing_vault'])) {
-			$data['dps_pxpost_billing_vault'] = $this->request->post['dps_pxpost_billing_vault'];
+		if (isset($this->request->post['payment_dps_pxpost_billing_vault'])) {
+			$data['payment_dps_pxpost_billing_vault'] = $this->request->post['payment_dps_pxpost_billing_vault'];
 		} else {
-			$data['dps_pxpost_billing_vault'] = $this->config->get('dps_pxpost_billing_vault');
+			$data['payment_dps_pxpost_billing_vault'] = $this->config->get('payment_dps_pxpost_billing_vault');
 		}
 		
-		if (isset($this->request->post['dps_pxpost_avs'])) {
-			$data['dps_pxpost_avs'] = $this->request->post['dps_pxpost_avs'];
+		if (isset($this->request->post['payment_dps_pxpost_avs'])) {
+			$data['payment_dps_pxpost_avs'] = $this->request->post['payment_dps_pxpost_avs'];
 		} else {
-			$data['dps_pxpost_avs'] = $this->config->get('dps_pxpost_avs');
+			$data['payment_dps_pxpost_avs'] = $this->config->get('payment_dps_pxpost_avs');
 		}
 
-		if (isset($this->request->post['dps_pxpost_processed_status_id'])) {
-			$data['dps_pxpost_processed_status_id'] = $this->request->post['dps_pxpost_processed_status_id'];
+		if (isset($this->request->post['payment_dps_pxpost_processed_status_id'])) {
+			$data['payment_dps_pxpost_processed_status_id'] = $this->request->post['payment_dps_pxpost_processed_status_id'];
 		} else {
-			$data['dps_pxpost_processed_status_id'] = $this->config->get('dps_pxpost_processed_status_id');
+			$data['payment_dps_pxpost_processed_status_id'] = $this->config->get('payment_dps_pxpost_processed_status_id');
 		}
-		if ( ! $data['dps_pxpost_processed_status_id']) $data['dps_pxpost_processed_status_id'] = 15;  # "Processed"
+		if ( ! $data['payment_dps_pxpost_processed_status_id']) $data['payment_dps_pxpost_processed_status_id'] = 15;  # "Processed"
 
-		if (isset($this->request->post['dps_pxpost_failed_status_id'])) {
-			$data['dps_pxpost_failed_status_id'] = $this->request->post['dps_pxpost_failed_status_id'];
+		if (isset($this->request->post['payment_dps_pxpost_failed_status_id'])) {
+			$data['payment_dps_pxpost_failed_status_id'] = $this->request->post['payment_dps_pxpost_failed_status_id'];
 		} else {
-			$data['dps_pxpost_failed_status_id'] = $this->config->get('dps_pxpost_failed_status_id');
+			$data['payment_dps_pxpost_failed_status_id'] = $this->config->get('payment_dps_pxpost_failed_status_id');
 		}
-		if ( ! $data['dps_pxpost_failed_status_id']) $data['dps_pxpost_failed_status_id'] = 10;  # "Failed"
+		if ( ! $data['payment_dps_pxpost_failed_status_id']) $data['payment_dps_pxpost_failed_status_id'] = 10;  # "Failed"
 
 		$this->load->model('localisation/order_status');
 
 		$data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 
-		if (isset($this->request->post['dps_pxpost_geo_zone_id'])) {
-			$data['dps_pxpost_geo_zone_id'] = $this->request->post['dps_pxpost_geo_zone_id'];
+		if (isset($this->request->post['payment_dps_pxpost_geo_zone_id'])) {
+			$data['payment_dps_pxpost_geo_zone_id'] = $this->request->post['payment_dps_pxpost_geo_zone_id'];
 		} else {
-			$data['dps_pxpost_geo_zone_id'] = $this->config->get('dps_pxpost_geo_zone_id');
+			$data['payment_dps_pxpost_geo_zone_id'] = $this->config->get('payment_dps_pxpost_geo_zone_id');
 		}
 
 		$this->load->model('localisation/geo_zone');
 
 		$data['geo_zones'] = $this->model_localisation_geo_zone->getGeoZones();
 
-		if (isset($this->request->post['dps_pxpost_status'])) {
-			$data['dps_pxpost_status'] = $this->request->post['dps_pxpost_status'];
+		if (isset($this->request->post['payment_dps_pxpost_status'])) {
+			$data['payment_dps_pxpost_status'] = $this->request->post['payment_dps_pxpost_status'];
 		} else {
-			$data['dps_pxpost_status'] = $this->config->get('dps_pxpost_status');
+			$data['payment_dps_pxpost_status'] = $this->config->get('payment_dps_pxpost_status');
 		}
 
-		if (isset($this->request->post['dps_pxpost_sort_order'])) {
-			$data['dps_pxpost_sort_order'] = $this->request->post['dps_pxpost_sort_order'];
+		if (isset($this->request->post['payment_dps_pxpost_sort_order'])) {
+			$data['payment_dps_pxpost_sort_order'] = $this->request->post['payment_dps_pxpost_sort_order'];
 		} else {
-			$data['dps_pxpost_sort_order'] = $this->config->get('dps_pxpost_sort_order');
+			$data['payment_dps_pxpost_sort_order'] = $this->config->get('payment_dps_pxpost_sort_order');
 		}
 
 		$data['header'] = $this->load->controller('common/header');
@@ -169,12 +169,12 @@ class ControllerExtensionPaymentDPSPxPost extends Controller {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 
-		if ( ! $this->request->post['dps_pxpost_username']) {
+		if ( ! $this->request->post['payment_dps_pxpost_username']) {
 			$this->error['username'] = $this->language->get('error_username');
 		}
 
 
-		if ( ! $this->request->post['dps_pxpost_url']) {
+		if ( ! $this->request->post['payment_dps_pxpost_url']) {
 			$this->error['url'] = $this->language->get('error_url');
 		}
 
